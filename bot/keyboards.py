@@ -11,6 +11,16 @@ main = ReplyKeyboardMarkup(
     input_field_placeholder="Choose one from the menu below! 📋⬇️",
 )
 
+welcome_markup = InlineKeyboardMarkup(
+    inline_keyboard=[
+        [InlineKeyboardButton(text="🗂️ Category", callback_data="category")],
+        [
+            InlineKeyboardButton(text="🛒 Cart", callback_data="cart"),
+            InlineKeyboardButton(text="👤 Contact", callback_data="contact"),
+        ],
+    ]
+)
+
 language = InlineKeyboardMarkup(
     inline_keyboard=[
         [

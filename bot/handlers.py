@@ -1,6 +1,6 @@
 from aiogram import F, Router
 from aiogram.filters import Command, CommandStart
-from aiogram.types import Message
+from aiogram.types import CallbackQuery, Message
 
 import bot.keyboards as kb
 
@@ -13,7 +13,8 @@ async def welcome_cmd(message: Message):
         f"Hello, this is your ID: {message.from_user.id}, and your name: {message.from_user.first_name}\n"
         "🇺🇿 Bot tilini tanlang!\n🇬🇧 Select bot language!\n🇷🇺 Выберите язык бота!",
         # reply_markup=kb.main,
-        reply_markup=kb.language,
+        # reply_markup=kb.language,
+        reply_markup=kb.welcome_markup,
     )
     # await message.answer("Hello!")
 
@@ -56,3 +57,10 @@ async def send_photo_by_url(message: Message):
         photo="https://i.pinimg.com/736x/a0/33/a6/a033a6d215cfdc41dbfd92c5ac5dc8cf.jpg",
         caption="This picture was uploaded via URL.",
     )
+
+
+@router.callback_query(F.data == "category")
+async def category(callback: Callback):
+    # await callback.answer("You have selected a category.")
+    await callback.answer("This is alert message!", show_alert=True)
+    await callback.message.answer("Hello!")
