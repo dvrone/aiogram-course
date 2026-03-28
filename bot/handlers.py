@@ -2,15 +2,29 @@ from aiogram import F, Router
 from aiogram.filters import Command, CommandStart
 from aiogram.types import Message
 
+import bot.keyboards as kb
+
 router = Router()
 
 
 @router.message(CommandStart())
 async def welcome_cmd(message: Message):
     await message.reply(
-        f"Hello, this is your ID: {message.from_user.id}, and your name: {message.from_user.first_name}"
+        f"Hello, this is your ID: {message.from_user.id}, and your name: {message.from_user.first_name}\n"
+        "🇺🇿 Bot tilini tanlang!\n🇬🇧 Select bot language!\n🇷🇺 Выберите язык бота!",
+        # reply_markup=kb.main,
+        reply_markup=kb.language,
     )
     # await message.answer("Hello!")
+
+
+@router.message(Command("cars"))
+async def get_cars(message: Message):
+    await message.answer(
+        f"Pick a car! 🚙",
+        # reply_markup=await kb.reply_buttons(),
+        reply_markup=await kb.inline_buttons(),
+    )
 
 
 @router.message(Command("help"))
